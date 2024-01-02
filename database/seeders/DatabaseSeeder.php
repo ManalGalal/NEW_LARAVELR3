@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+//updateing Task_day 9 with correct code to modify the Category factory and seeding option 
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Car;
