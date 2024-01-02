@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,144 +19,49 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('about', function () {
-    return view('about');
+Route::get('login', function () {
+    return view('login');
 });
 
-Route::get('contactus', function () {
-    return view('contactus');
+Route::post('logged', function () {
+    return 'You are logged in';
+})->name('logged');
+
+Route::get('aya',[ExampleController::class,'show']);
+
+Route::post('imageUpload',[ExampleController::class,'upload'])->name('imageUpload');
+
+Route::get('test', function(){
+    return view('testHome');
 });
 
-
-
-//Routing Constrains --> Prefix and Gropu
-
-
-Route::prefix('blog')->group(function(){
-
-
-    Route::get('/', function () {
-        return view ('blog') ;
-    });
-
-    Route::get('science', function () {
-        return view ('science') ;
-    });
-
-    Route::get('sports', function () {
-        return view ('sports') ;
-    });
-
-    Route::get('math', function () {
-        return view ('math') ;
-    });
-    Route::get('medical', function () {
-        return view ('medical') ;
-    });
-    
+Route::get('image', function(){
+    return view('image');
 });
 
-//=====================================================================================
-//    session Practice
-//=====================================================================================
-            // Route::get('test', function () {
-            //     return 'welcome to my laravel project';
-            // });
-          // Route::get('test1/{id}', function ($id) {
-            //     return ' the  Id is: ' . $id ;
-            // });
+Route::get('404', function(){
+    return view('404');
+});
 
-            // //Routing Constrains--> Send Parameter with Regular Expression
+Route::get('contact', function () {
+    return view('contact');
+})->name('contact');
 
-            // // Route::get('test2/{id?}', function ($id=0) {
-            // //     return ' the  Id is: ' . $id ;
-            // // })->where(['id' => '[0-9]+  ']);
-
-
-            // // Routing Constrains --> Sending Parameter with Wherenumber 
-
-            // Route::get('test2/{id?}', function ($id=0) {
-            //     return ' the  Id is: ' . $id ;
-            // })->whereNumber('id') ;
-
-
-            // //Routing Constrains--> Sending Parameter with WhereAlpha
-
-            // Route::get('test3/{name?}', function ($name=null) {
-            //     return ' the  name is: ' . $name ;
-            // })->whereAlpha('name') ;
-
-
-            // // Routing Constrains--> Multiple Parameters
-
-            // Route::get('test4/{id}/{name}', function ($id=0, $name) {
-            //     return ' the  Id is: ' . $id . ' and my name is: ' . $name ;
-            // })->where(['id' => '[0-9]+', 'name' =>'[a-zA-Z]+']);
-
-
-            // // Routing Constrains --> Using whereIN 
-            // Route::get('product/{category}', function ($cat) {
-            //     return ' the Category is: ' . $cat ;
-            // })->whereIn('category',['laptop','pc', 'mobile']) ;
-
-
-//Routing Constrains Patterns-->  APP -> Providers
-//== Go to RouteServiceProvider.php-> add the required constrains inside  public function boot(): void like this 
-        // public function boot(): void 
-        // {
-        //     Route::pattern( 'name', '[a-zA-Z]+');
-        // }
-        // pattern is used with regular expression only
-
-   
-
-    // Route::get('test1/{id}', function ($id) {
-    //     return ' the  Id is: ' . $id ;
-    // });
-    
-    // Route::get('sport', function () {
-    //     return 'welcome to my laravel project';
-    // });
-    
-    // Route::get('test2/{id?}', function ($id=0) {
-    //     return ' the  Id is: ' . $id ;
-    // })->whereNumber('id') ;
-    
-    
-    //Routing Constrains--> Sending Parameter with WhereAlpha
-    
-    // Route::get('test3/{name?}', function ($name=null) {
-    //     return ' the  name is: ' . $name ;
-    // })->whereAlpha('name') ;
-    
-    
-    // Routing Constrains--> Multiple Parameters
-    
-//     Route::get('test4/{id}/{name}', function ($id=0, $name) {
-//         return ' the  Id is: ' . $id . ' and my name is: ' . $name ;
-//     })->where(['id' => '[0-9]+', 'name' =>'[a-zA-Z]+']);
-    
-    
-//     // Routing Constrains --> Using whereIN 
-//     Route::get('product/{category}', function ($cat) {
-//         return ' the Category is: ' . $cat ;
-//     })->whereIn('category',['laptop','pc', 'mobile']) ;
-
+// Route::get('contact', function(){
+//     return view('contact');
 // });
+Route::get('blogs', function(){
+    return view('blogs');
+});
 
-//=================================
-// FALLBACK --> it routes 404 Error Page to a certain page.
-
-
-// Route::fallback(function(){
-//     return redirect('/');
-// });
-
-// Route::fallback(fn() => redirect('/'));
-
-//=========================
-//Route to View 
-
-
-//New Blade File Route
+// Routes for the car table
+Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('cars',[CarController::class,'index'])->name('cars');
+Route::get('updateCar/{id}',[CarController::class,'edit']);
+Route::get('showCar/{id}',[CarController::class,'show']);
+Route::get('deleteCar/{id}',[CarController::class,'destroy']);
+Route::get('trashed',[CarController::class,'trashed'])->name('trashed');
+Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar');
+Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
+Route::put('update/{id}',[CarController::class,'update'])->name('update');
+Route::post('storeCar',[CarController::class,'store'])->name('storeCar');

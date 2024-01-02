@@ -116,7 +116,11 @@ body {
     </div>
   </div>
 </div>
-
+@for ($i = 0; $i < $count; $i++)
+    
+@endfor
+    
+@endfor
 <div class="footer">
   <h2>Footer</h2>
 </div>

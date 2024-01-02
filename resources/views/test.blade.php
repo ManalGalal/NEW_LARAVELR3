@@ -6,8 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> My First Blade File </h1>
-    <h2> First View </h2>
+    <img src="{{ asset('assets/images/img.jpeg')}}" alt="">
 
 </body>
 </html>
