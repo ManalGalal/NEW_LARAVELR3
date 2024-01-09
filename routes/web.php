@@ -54,8 +54,13 @@ Route::get('blogs', function(){
     return view('blogs');
 });
 
+
+Auth::routes(['verify'=>true]);
+
+
 // Routes for the car table
-Route::get('createCar',[CarController::class,'create'])->name('createCar');
+//Route::get('createCar',[CarController::class,'create'])->name('createCar');
+Route::get('createCar',[CarController::class,'create'])->middleware('verified')->name('createCar');
 Route::get('cars',[CarController::class,'index'])->name('cars');
 Route::get('updateCar/{id}',[CarController::class,'edit']);
 Route::get('showCar/{id}',[CarController::class,'show']);
@@ -65,3 +70,7 @@ Route::get('restoreCar/{id}',[CarController::class,'restore'])->name('restoreCar
 Route::get('forceDelete/{id}',[CarController::class,'forceDelete'])->name('forceDelete');
 Route::put('update/{id}',[CarController::class,'update'])->name('update');
 Route::post('storeCar',[CarController::class,'store'])->name('storeCar');
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

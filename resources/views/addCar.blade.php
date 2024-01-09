@@ -13,11 +13,11 @@
 
 <div class="container">
   <h2>Add new car data</h2>
-  <form action="{{ route('storeCar') }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route('storeCar')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ old('title') }}" >
+      <input type="drop" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ old('title') }}" >
       @error('title')
         {{ $message }}
       @enderror
@@ -26,6 +26,19 @@
       <label for="description">description:</label>
       <textarea class="form-control" name="description" id="" cols="60" rows="3">{{ old('description') }}</textarea>
       @error('description')
+        {{ $message }}
+      @enderror
+    </div>
+    <div class="form-group">
+      <label for="category">Category :</label>
+      <select name="category_id", id="" >
+        <option value=""> Select Category</option>
+        @foreach ($categories as $category)
+        <option value="{{$category->id}}">  {{$category->cat_name}} </option>
+
+        @endforeach
+      </select>
+      @error('category_id')
         {{ $message }}
       @enderror
     </div>
